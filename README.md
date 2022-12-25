@@ -22,7 +22,7 @@ To run all tests:
 pnpm run t
 ```
 
-To run all by file:
+To run a single test file:
 
 ```
 pnpm run t1 src/2-react-hooks/02-01b-useEffect--soln/app.test.js
