@@ -14,9 +14,9 @@ localStorage. This is problematic because it could be a performance bottleneck
 to know the value from localStorage the first time this component is rendered!
 So the additional reads are wasted effort.
 
-To avoid this problem, React's useState hook allows you to pass a function
-instead of the actual value, and then it will only call that function to get the
-state value when the component is rendered the first time. So you can go from
+To avoid this problem, *React's useState hook allows you to pass a function*
+instead of the actual value, and then *it will only call that function to get the
+state value when the component is rendered the* **first time**. So you can go from
 this: `React.useState(someExpensiveComputation())` To this:
 `React.useState(() => someExpensiveComputation())`
 
