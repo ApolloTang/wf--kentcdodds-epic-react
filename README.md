@@ -2,10 +2,34 @@
 
 
 
-## How to run
 
-1. Install:  `pnpm install`
 
-2. For example: `pnpm run dev 1-fundamentals/07-01a-form-basics/main.tsx`
+Installation:  
 
-    
+````
+pnpm install
+````
+
+To develop: 
+
+ ````
+ pnpm run dev src/1-fundamentals/07-01a-form-basics/main.tsx
+ ````
+
+To run all tests:
+
+```
+pnpm run t
+```
+
+To run all by file:
+
+```
+pnpm run t1 src/2-react-hooks/02-01b-useEffect--soln/app.test.js
+```
+
+
+
+
+
+ 
