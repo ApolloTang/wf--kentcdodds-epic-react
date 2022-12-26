@@ -22,14 +22,14 @@ function Greeting({initialName = ''}) {
   React.useEffect(() => {
     console.log('useEffect executed due to localReferencingObj')
   }, [
-    localReferencingObj // <---- this reference change will NOT trigger useEffect's callback to run
+    localReferencingObj // <---- this reference change WILL TRIGGER useEffect's callback to run
   ])
 
 
   React.useEffect(() => {
     console.log('useEffect executed due to globalReferencingObj')
   }, [
-    globalReferencingObj // <---- this reference change will NOT trigger useEffect's callback to run
+    globalReferencingObj // <---- this reference change will NOT TRIGGER useEffect's callback to run
   ])
 
   // ...
