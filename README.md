@@ -10,7 +10,7 @@ Installation:
 pnpm install
 ````
 
-To develop: 
+To develop a project: 
 
  ````
  pnpm run dev src/1-fundamentals/07-01a-form-basics/main.tsx
