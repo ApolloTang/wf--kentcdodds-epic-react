@@ -9,19 +9,19 @@
 import * as React from 'react'
 
 function Child() {
-  console.log('%c    Child: render start', 'color: MediumSpringGreen')
+  console.log('%c    Child [Green]: render start', 'color: Green')
 
   const [count, setCount] = React.useState(() => {
-    console.log('%c    Child: useState(() => 0)', 'color: tomato')
+    console.log('%c    Child [brown]: useState(() => 0)', 'color: brown')
     return 0
   })
 
   React.useEffect(() => {
-    console.log('%c    Child: useEffect(() => {})', 'color: LightCoral')
+    console.log('%c    Child [red  ]: useEffect(() => {})', 'color: red')
     return () => {
       console.log(
-        '%c    Child: useEffect(() => {}) cleanup 🧹',
-        'color: LightCoral',
+        '%c    Child [red  ]: useEffect(() => {}) cleanup 🧹',
+        'color: red',
       )
     }
   })
@@ -40,11 +40,11 @@ function Child() {
   }, [])
 
   React.useEffect(() => {
-    console.log('%c    Child: useEffect(() => {}, [count])', 'color: HotPink')
+    console.log('%c    Child [magenta]: useEffect(() => {}, [count])', 'color: magenta')
     return () => {
       console.log(
-        '%c    Child: useEffect(() => {}, [count]) cleanup 🧹',
-        'color: HotPink',
+        '%c    Child [magenta]: useEffect(() => {}, [count]) cleanup 🧹',
+        'color: magenta',
       )
     }
   }, [count])
@@ -55,23 +55,23 @@ function Child() {
     </button>
   )
 
-  console.log('%c    Child: render end', 'color: MediumSpringGreen')
+  console.log('%c    Child [Green]: render end', 'color: Green')
 
   return element
 }
 
 function App() {
-  console.log('%cApp: render start', 'color: MediumSpringGreen')
+  console.log('%cApp [Green]: render start', 'color: Green')
 
   const [showChild, setShowChild] = React.useState(() => {
-    console.log('%cApp: useState(() => false)', 'color: tomato')
+    console.log('%cApp [brown]: useState(() => false)', 'color: brown')
     return false
   })
 
   React.useEffect(() => {
-    console.log('%cApp: useEffect(() => {})', 'color: LightCoral')
+    console.log('%cApp [red  ]: useEffect(() => {})', 'color: red')
     return () => {
-      console.log('%cApp: useEffect(() => {}) cleanup 🧹', 'color: LightCoral')
+      console.log('%cApp [red  ]: useEffect(() => {}) cleanup 🧹', 'color: red')
     }
   })
 
@@ -86,11 +86,11 @@ function App() {
   }, [])
 
   React.useEffect(() => {
-    console.log('%cApp: useEffect(() => {}, [showChild])', 'color: HotPink')
+    console.log('%cApp [magenta]: useEffect(() => {}, [showChild])', 'color: magenta')
     return () => {
       console.log(
-        '%cApp: useEffect(() => {}, [showChild]) cleanup 🧹',
-        'color: HotPink',
+        '%cApp [magenta]: useEffect(() => {}, [showChild]) cleanup 🧹',
+        'color: magenta',
       )
     }
   }, [showChild])
@@ -119,7 +119,7 @@ function App() {
     </>
   )
 
-  console.log('%cApp: render end', 'color: MediumSpringGreen')
+  console.log('%cApp [Green]: render end', 'color: Green')
 
   return element
 }
