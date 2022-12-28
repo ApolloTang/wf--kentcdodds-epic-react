@@ -28,11 +28,12 @@ function useLocalStorageState(
   })
 
   // const prevKeyRef = React.useRef(key)
-  let prevKey = prevKeyRef_global ?? key
+  const prevKeyRef = prevKeyRef_global ?? key
 
   // Check the example at src/examples/local-state-key-change.js to visualize a key change
   React.useEffect(() => {
     // const prevKey = prevKeyRef.current
+    const prevKey = prevKeyRef
     console.log(prevKey, key)
     if (prevKey !== key) {
       window.localStorage.removeItem(prevKey)
