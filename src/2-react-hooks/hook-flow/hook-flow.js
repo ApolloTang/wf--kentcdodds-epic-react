@@ -28,13 +28,13 @@ function Child() {
 
   React.useEffect(() => {
     console.log(
-      '%c    Child: useEffect(() => {}, [])',
-      'color: MediumTurquoise',
+      '%c    Child [blue  ]: useEffect(() => {}, [])',
+      'color: blue',
     )
     return () => {
       console.log(
-        '%c    Child: useEffect(() => {}, []) cleanup 🧹',
-        'color: MediumTurquoise',
+        '%c    Child [blue  ]: useEffect(() => {}, []) cleanup 🧹',
+        'color: blue',
       )
     }
   }, [])
@@ -76,11 +76,11 @@ function App() {
   })
 
   React.useEffect(() => {
-    console.log('%cApp: useEffect(() => {}, [])', 'color: MediumTurquoise')
+    console.log('%cApp [blue]: useEffect(() => {}, [])', 'color: blue')
     return () => {
       console.log(
-        '%cApp: useEffect(() => {}, []) cleanup 🧹',
-        'color: MediumTurquoise',
+        '%cApp [blue]: useEffect(() => {}, []) cleanup 🧹',
+        'color: blue',
       )
     }
   }, [])
