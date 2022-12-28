@@ -8,6 +8,11 @@
 
 import * as React from 'react'
 
+
+
+
+
+
 function Child() {
   console.log('%c    Child [Green]: render start', 'color: Green')
 
@@ -26,6 +31,7 @@ function Child() {
     }
   })
 
+
   React.useEffect(() => {
     console.log(
       '%c    Child [blue  ]: useEffect(() => {}, [])',
@@ -38,6 +44,7 @@ function Child() {
       )
     }
   }, [])
+
 
   React.useEffect(() => {
     console.log('%c    Child [magenta]: useEffect(() => {}, [count])', 'color: magenta')
@@ -59,6 +66,23 @@ function Child() {
 
   return element
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function App() {
   console.log('%cApp [Green]: render start', 'color: Green')
