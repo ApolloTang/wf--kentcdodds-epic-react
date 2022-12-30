@@ -92,7 +92,6 @@ function App() {
     return false
   })
 
-  console.log('showChild',showChild)
 
   React.useEffect(() => {
     console.log('%cApp [red  ]: useEffect(() => {})', 'color: red')
@@ -124,7 +123,6 @@ function App() {
   const element = () =>(
     <>
       <label>
-        {console.log('render')}
         <input
           type="checkbox"
           checked={showChild}
