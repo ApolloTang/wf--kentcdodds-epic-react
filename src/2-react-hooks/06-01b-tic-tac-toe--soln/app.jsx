@@ -2,18 +2,18 @@ import React from 'react'
 
 
 function Board() {
-  const [squares, setSquares] = React.useState(Array(9).fill(null))
+  const [squares, setSquares] = React.useState(Array(9).fill(null)) // typeof squares = (null|'X'|'O')[]
 
-  const nextValue = calculateNextValue(squares)
-  const winner = calculateWinner(squares)
+  const nextValue = calculateNextValue(squares) // 'X'|'O'
+  const winner = calculateWinner(squares)       // 'X'|'O'|null
   const status = calculateStatus(winner, squares, nextValue)
 
-  function selectSquare(square) {
-    if (winner || squares[square]) {
-      return
+  function selectSquare(i) {
+    if (winner || squares[i]) { // already has a winnner OR square has already filled
+      return // Do nothing
     }
     const squaresCopy = [...squares]
-    squaresCopy[square] = nextValue
+    squaresCopy[i] = nextValue
     setSquares(squaresCopy)
   }
 
@@ -67,13 +67,13 @@ function Game() {
 function calculateStatus(winner, squares, nextValue) {
   return winner
     ? `Winner: ${winner}`
-    : squares.every(Boolean)
+    : squares.every(Boolean)  // true means all 9 squares are fill up
     ? `Scratch: Cat's game`
     : `Next player: ${nextValue}`
 }
 
 function calculateNextValue(squares) {
-  return squares.filter(Boolean).length % 2 === 0 ? 'X' : 'O'
+  return squares.filter(Boolean).length % 2 === 0 ? 'X' : 'O' // 'X' always go first
 }
 
 function calculateWinner(squares) {
