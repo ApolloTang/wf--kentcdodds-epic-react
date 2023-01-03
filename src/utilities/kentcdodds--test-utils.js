@@ -1,6 +1,11 @@
 // From https://github.com/kentcdodds/react-workshop-app/blob/main/src/test-utils.tsx
 
-import chalk from 'chalk'
+// import chalk from 'chalk'
+// https://stackoverflow.com/a/71722204/3136861
+async function chalk() {
+  return (await import("chalk")).default;
+}
+
 import {prettyDOM} from '@testing-library/react'
 
 function alfredTip(
