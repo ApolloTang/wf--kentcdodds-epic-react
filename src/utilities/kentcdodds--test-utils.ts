@@ -1,17 +1,23 @@
 // From https://github.com/kentcdodds/react-workshop-app/blob/main/src/test-utils.tsx
 
-// import chalk from 'chalk'
-// https://stackoverflow.com/a/71722204/3136861
-async function chalk() {
-  return (await import("chalk")).default;
-}
+import chalk from 'chalk'
+
+// The following from:
+//   https://stackoverflow.com/a/71722204/3136861
+// but typescript does not work. So instead of using chalk@5
+// I use chalk@4 for now. See:
+//   https://stackoverflow.com/a/70748594/3136861
+//
+// async function chalk() {
+//   return (await import("chalk")).default;
+// }
 
 import {prettyDOM} from '@testing-library/react'
 
 function alfredTip(
-  shouldThrow, // : unknown | (() => unknown),
-  tip,         // : string | ((error: unknown) => string),
-  {displayEl}={} // : {displayEl?: true | ((error: unknown) => HTMLElement)} = {},
+  shouldThrow: unknown | (() => unknown),
+  tip: string | ((error: unknown) => string),
+  {displayEl}: {displayEl?: true | ((error: unknown) => HTMLElement)} = {},
 ) {
   let caughtError
   if (typeof shouldThrow === 'function') {
