@@ -2,12 +2,11 @@
 
 import chalk from 'chalk'
 
-// The following from:
+// The following work, it is from:
 //
 //   https://stackoverflow.com/a/71722204/3136861
 //
-// work, except typescript. So instead of using chalk@5
-// I use chalk@4 for now. See:
+// However, typescript fails. So instead of using chalk@5 I use chalk@4 for now. See:
 //
 //   https://stackoverflow.com/a/70748594/3136861
 //
