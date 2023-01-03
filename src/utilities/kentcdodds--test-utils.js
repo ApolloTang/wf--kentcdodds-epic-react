@@ -1,3 +1,5 @@
+// From https://github.com/kentcdodds/react-workshop-app/blob/main/src/test-utils.tsx
+
 import chalk from 'chalk'
 import {prettyDOM} from '@testing-library/react'
 
