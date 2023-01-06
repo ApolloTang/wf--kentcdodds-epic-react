@@ -42,8 +42,6 @@ function Game() {
   )
 
   const currentSquares = history[currentStep]
-  console.log(history, currentStep)
-  console.log('squares:',currentSquares)
 
   const nextValue = calculateNextValue(currentSquares) // 'X'|'O'
   const winner = calculateWinner(currentSquares)       // 'X'|'O'|null
@@ -66,8 +64,7 @@ function Game() {
     setCurrentStep(0)
   }
 
-  function foo () {
-  }
+
   return (
     <div className="game">
       <div className="game-board">
