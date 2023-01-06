@@ -1,4 +1,5 @@
 import * as React from 'react'
+import {alfredTip} from '../../utilities/kentcdodds--test-utils'
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {App} from './app.jsx'
@@ -6,68 +7,90 @@ import {App} from './app.jsx'
 
 test('can play a game of tic tac toe', async () => {
   render(<App />)
+
   // prettier-ignore
   const [
-    s1, s2, s3,
-    s4, s5, s6,
+    s1, s2, s3, // eslint-disable-line no-unused-vars
+    s4, s5, s6, // eslint-disable-line no-unused-vars
     s7, s8, s9 // eslint-disable-line no-unused-vars
   ] = Array.from(screen.queryAllByRole('button'))
   expect(screen.getByText('Next player: X')).toBeInTheDocument()
+  const gameStart = screen.getByText(/go to game start/i)
+  expect(gameStart).toHaveAttribute('disabled')
+  expect(gameStart).toHaveTextContent('current')
 
   await userEvent.click(s1)
   expect(s1).toHaveTextContent('X')
 
   expect(screen.getByText('Next player: O')).toBeInTheDocument()
+  const firstMove = screen.getByText(/go to move #1/i)
+  expect(gameStart).not.toHaveAttribute('disabled')
+  expect(gameStart).not.toHaveTextContent('current')
+  expect(firstMove).toHaveAttribute('disabled')
+  expect(firstMove).toHaveTextContent('current')
+
   await userEvent.click(s5)
   expect(s5).toHaveTextContent('O')
+  const secondMove = screen.getByText(/go to move #2/i)
+  expect(gameStart).not.toHaveAttribute('disabled')
+  expect(gameStart).not.toHaveTextContent('current')
+  expect(firstMove).not.toHaveAttribute('disabled')
+  expect(firstMove).not.toHaveTextContent('current')
+  expect(secondMove).toHaveAttribute('disabled')
+  expect(secondMove).toHaveTextContent('current')
 
-  expect(screen.getByText('Next player: X')).toBeInTheDocument()
-  await userEvent.click(s9)
-  expect(s9).toHaveTextContent('X')
+  await userEvent.click(firstMove)
+  expect(gameStart).not.toHaveAttribute('disabled')
+  expect(gameStart).not.toHaveTextContent('current')
+  expect(firstMove).toHaveAttribute('disabled')
+  expect(firstMove).toHaveTextContent('current')
+  expect(secondMove).not.toHaveAttribute('disabled')
+  expect(secondMove).not.toHaveTextContent('current')
+  expect(s5).not.toHaveTextContent('O')
 
-  expect(screen.getByText('Next player: O')).toBeInTheDocument()
-  await userEvent.click(s7)
-  expect(s7).toHaveTextContent('O')
+  alfredTip(
+    () =>
+      expect(
+        JSON.parse(window.localStorage.getItem('tic-tac-toe:history')),
+      ).toEqual(
+        // prettier-ignore
+        [
+          [null, null, null,
+          null, null, null,
+          null, null, null],
+          ['X',  null, null,
+          null, null, null,
+          null, null, null],
+          ['X',  null, null,
+          null, 'O',  null,
+          null, null, null]
+        ],
+      ),
+    'Make sure that the localStorage item is updated with the JSON.stringified squares array',
+  )
 
-  expect(screen.getByText('Next player: X')).toBeInTheDocument()
-  await userEvent.click(s3)
-  expect(s3).toHaveTextContent('X')
+  await userEvent.click(gameStart)
+  expect(s1).toHaveTextContent('')
+  expect(s5).toHaveTextContent('')
+  expect(screen.queryAllByRole('listitem').length).toBe(3)
 
-  expect(screen.getByText('Next player: O')).toBeInTheDocument()
-  await userEvent.click(s2)
-  expect(s2).toHaveTextContent('O')
+  await userEvent.click(screen.getByText('restart'))
+  expect(s1).toHaveTextContent('')
+  expect(s5).toHaveTextContent('')
+  expect(screen.queryAllByRole('listitem').length).toBe(1)
 
-  expect(screen.getByText('Next player: X')).toBeInTheDocument()
-  await userEvent.click(s6)
-  expect(s6).toHaveTextContent('X')
-
-  // game is over so no more moves may be played
-  expect(screen.getByText('Winner: X')).toBeInTheDocument()
-  await userEvent.click(s4)
-  expect(s4).toHaveTextContent('')
-})
-
-test('does not change square value when it is clicked multiple times', async () => {
-  render(<App />)
-  const [square1] = Array.from(screen.queryAllByRole('button'))
-
-  await userEvent.click(square1)
-  await userEvent.click(square1)
-  expect(square1).toHaveTextContent('X')
-})
-
-test('can reset game and start from beginning', async () => {
-  const {container} = render(<App />)
-  const [square1, square2] = Array.from(screen.queryAllByRole('button'))
-  const [reset] = container.getElementsByClassName('restart')
-
-  await userEvent.click(square1)
-  expect(square1).toHaveTextContent('X')
-  await userEvent.click(square2)
-  expect(square2).toHaveTextContent('O')
-
-  await userEvent.click(reset)
-
-  await userEvent.click(square2)
-  expect(square2).toHaveTextContent('X')
+  alfredTip(
+    () =>
+      expect(
+        JSON.parse(window.localStorage.getItem('tic-tac-toe:history')),
+      ).toEqual(
+        // prettier-ignore
+        [
+          [null, null, null,
+          null, null, null,
+          null, null, null]
+        ],
+      ),
+    'Make sure that the localStorage item is updated with the JSON.stringified squares array',
+  )
 })

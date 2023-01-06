@@ -64,17 +64,21 @@ function Game() {
     setCurrentStep(0)
   }
 
-  const moves = history.map((stepSquares, step) => {
-    const desc = step ? `Go to move #${step}` : 'Go to game start'
-    const isCurrentStep = step === currentStep
-    return (
-      <li key={step}>
-        <button disabled={isCurrentStep} onClick={() => setCurrentStep(step)}>
-          {desc} {isCurrentStep ? '(current)' : null}
-        </button>
-      </li>
-    )
-  })
+  const moves = history.map(
+    (move, i) => {
+      const isCurrent =  i === currentStep
+      const key = JSON.stringify(move)
+      return (
+        <li key={key}>
+          <button
+            disabled={isCurrent}
+            onClick={()=>{ setCurrentStep(i)}}>
+            {i>0 ? `Go to move #${i}` : 'Go to game start' }{isCurrent? ' (current)' : null}
+          </button>
+        </li>
+      )
+    }
+  )
 
   return (
     <div className="game">
