@@ -1,6 +1,9 @@
-import React from 'react'
-import {useLocalStorageState} from './utils.js'
+// useState: tic tac toe
+// 💯 add game history feature
+// http://localhost:3000/isolated/final/04.extra-3.js
 
+import * as React from 'react'
+import {useLocalStorageState} from '../utils'
 
 function Board({squares, onClick}) {
   function renderSquare(i) {
@@ -33,37 +36,60 @@ function Board({squares, onClick}) {
 }
 
 function Game() {
-  const [squares, setSquares] = useLocalStorageState( 'squares', Array(9).fill(null),)
-  const nextValue = calculateNextValue(squares) // 'X'|'O'
-  const winner = calculateWinner(squares)       // 'X'|'O'|null
-  const status = calculateStatus(winner, squares, nextValue)
+  const [history, setHistory] = useLocalStorageState('tic-tac-toe:history', [
+    Array(9).fill(null),
+  ])
+  const [currentStep, setCurrentStep] = useLocalStorageState(
+    'tic-tac-toe:step',
+    0,
+  )
 
-  function selectSquare(i) {
-    if (winner || squares[i]) { // already has a winnner OR square has already filled
-      return // Do nothing
+  const currentSquares = history[currentStep]
+  const nextValue = calculateNextValue(currentSquares)
+  const winner = calculateWinner(currentSquares)
+  const status = calculateStatus(winner, currentSquares, nextValue)
+
+  function selectSquare(square) {
+    if (winner || currentSquares[square]) {
+      return
     }
-    const squaresCopy = [...squares]
-    squaresCopy[i] = nextValue
-    setSquares(squaresCopy)
+
+    const newHistory = history.slice(0, currentStep + 1)
+    const squares = [...currentSquares]
+
+    squares[square] = nextValue
+    setHistory([...newHistory, squares])
+    setCurrentStep(newHistory.length)
   }
 
   function restart() {
-    setSquares(Array(9).fill(null))
+    setHistory([Array(9).fill(null)])
+    setCurrentStep(0)
   }
 
-  function foo () {
-  }
+  const moves = history.map((stepSquares, step) => {
+    const desc = step ? `Go to move #${step}` : 'Go to game start'
+    const isCurrentStep = step === currentStep
+    return (
+      <li key={step}>
+        <button disabled={isCurrentStep} onClick={() => setCurrentStep(step)}>
+          {desc} {isCurrentStep ? '(current)' : null}
+        </button>
+      </li>
+    )
+  })
+
   return (
     <div className="game">
       <div className="game-board">
-        <Board squares={squares} onClick={selectSquare}/>
+        <Board squares={currentSquares} onClick={selectSquare}/>
         <button className="restart" onClick={restart}>
           restart
         </button>
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <ol>moves</ol>
+        <ol>{moves}</ol>
       </div>
     </div>
   )
@@ -72,13 +98,13 @@ function Game() {
 function calculateStatus(winner, squares, nextValue) {
   return winner
     ? `Winner: ${winner}`
-    : squares.every(Boolean)  // true means all 9 squares are fill up
+    : squares.every(Boolean)
     ? `Scratch: Cat's game`
     : `Next player: ${nextValue}`
 }
 
 function calculateNextValue(squares) {
-  return squares.filter(Boolean).length % 2 === 0 ? 'X' : 'O' // 'X' always go first
+  return squares.filter(Boolean).length % 2 === 0 ? 'X' : 'O'
 }
 
 function calculateWinner(squares) {
@@ -104,4 +130,5 @@ function calculateWinner(squares) {
 function App() {
   return <Game />
 }
-export {App}
+
+export default App
