@@ -31,6 +31,7 @@ specifiers:
   style-loader: ^3.3.1
   tailwindcss: ^3.1.8
   typescript: ^4.8.4
+  vanilla-tilt: ^1.8.0
   webpack: ^5.74.0
   webpack-dev-server: ^4.11.1
   webpack-merge: ^5.8.0
@@ -38,6 +39,7 @@ specifiers:
 dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  vanilla-tilt: 1.8.0
 
 devDependencies:
   '@babel/core': 7.19.3
@@ -6255,6 +6257,10 @@ packages:
       '@types/istanbul-lib-coverage': 2.0.4
       convert-source-map: 1.9.0
     dev: true
+
+  /vanilla-tilt/1.8.0:
+    resolution: {integrity: sha512-wVCHyyfRuiRdKhDTNxKPb60lkagmywDSqLgFETEr71Sm646AvGxuf/14Kx9A8FaISyYvMoKQHk6FTqt+YLGhEw==}
+    dev: false
 
   /vary/1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
