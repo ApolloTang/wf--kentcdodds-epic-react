@@ -52,12 +52,13 @@ function Game() {
       return // Do nothing
     }
 
-    const newHistory = history.slice(0, currentStep + 1)
     const squaresCopy = [...currentSquares]
     squaresCopy[i] = nextValue
+    const newHistory = [...history]
+    
     setHistory([...newHistory, squaresCopy])
 
-    setCurrentStep(newHistory.length)
+    setCurrentStep( currentStep=>currentStep+1 )
   }
 
   function restart() {

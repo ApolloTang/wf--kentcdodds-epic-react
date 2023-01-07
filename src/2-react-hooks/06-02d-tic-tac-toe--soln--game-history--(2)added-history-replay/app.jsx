@@ -52,11 +52,13 @@ function Game() {
       return // Do nothing
     }
 
-    const newHistory = history.slice(0, currentStep + 1)
     const squaresCopy = [...currentSquares]
     squaresCopy[i] = nextValue
+    const newHistory = history.slice(0, currentStep + 1) // once we jump to a particular time in history, we discard everything after that time.
+    
     setHistory([...newHistory, squaresCopy])
 
+    // setCurrentStep( currentStep=>currentStep+1 ) // currentStep is no longer valid because we have a new history
     setCurrentStep(newHistory.length)
   }
 
