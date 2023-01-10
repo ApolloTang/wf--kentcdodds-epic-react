@@ -1,4 +1,4 @@
-import {graphql} from '@kentcdodds/react-workshop-app/server'
+import {graphql} from './server'
 
 const pokemonApi = graphql.link('https://graphql-pokemon2.vercel.app/')
 
