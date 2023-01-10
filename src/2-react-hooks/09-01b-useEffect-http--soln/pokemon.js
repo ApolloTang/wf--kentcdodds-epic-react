@@ -42,9 +42,13 @@ function fetchPokemon(name, delay = 1500) {
       }),
     })
     .then(async response => {
-      const {data} = await response.json()
+      const data = await response.json()
+      console.log('xxxxyyyyx :', data)
+      console.log('xxxxyyyyx :', data.pokemon)
       if (response.ok) {
         const pokemon = data?.pokemon
+
+        console.log('xxxxyyyyxpokemon :', pokemon)
         if (pokemon) {
           pokemon.fetchedAt = formatDate(new Date())
           return pokemon
@@ -54,7 +58,7 @@ function fetchPokemon(name, delay = 1500) {
       } else {
         // handle the graphql errors
         const error = {
-          message: data?.errors?.map(e => e.message).join('\n'),
+          message: 'xxxxxxxxxxxxxxxx' // data?.errors?.map(e => e.message).join('\n'),
         }
         return Promise.reject(error)
       }
@@ -80,6 +84,8 @@ function PokemonInfoFallback({name}) {
 }
 
 function PokemonDataView({pokemon}) {
+  console.log('xxxxxxxxxxxxxx', pokemon)
+
   return (
     <div>
       <div className="pokemon-info__img-wrapper">
@@ -188,6 +194,8 @@ function PokemonForm({
 }
 
 function ErrorFallback({error, resetErrorBoundary}) {
+  console.log('xxxxxxxxxxxxxx ERROR')
+  error.message = error.message ? error.message : ''
   return (
     <div role="alert">
       There was an error:{' '}

@@ -21,6 +21,8 @@ function PokemonInfo({pokemonName}) {
   if (!pokemonName) {
     return 'Submit a pokemon'
   } else if (!pokemon) {
+
+  console.log('xxxxxxxxxxxxxx App', pokemon)
     return <PokemonInfoFallback name={pokemonName} />
   } else {
     return <PokemonDataView pokemon={pokemon} />
