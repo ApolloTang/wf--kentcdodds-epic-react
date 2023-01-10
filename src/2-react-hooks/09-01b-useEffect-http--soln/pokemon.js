@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {ErrorBoundary} from 'react-error-boundary'
-import img from '~/img/pokemon/fallback-pokemon.jpg'
+import img from '../img/pokemon/fallback-pokemon.jpg'
 
 const formatDate = date =>
   `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')} ${String(
