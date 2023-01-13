@@ -14,7 +14,7 @@
 
     "skipLibCheck": true,
 
-    "typeRoots": ["../../../node_modules/@types"],
+    "typeRoots": ["@types", "../../../node_modules/@types"],
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
