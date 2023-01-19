@@ -16,13 +16,14 @@ function PokemonInfo({pokemonName}) {
       return
     }
     setPokemon(null)
-    setError(null)
+    // setError(null)    // <---- turn off resetting error, prior to new fetching.
     fetchPokemon(pokemonName).then(
       pokemon => setPokemon(pokemon),
       error => setError(error)
     )
   }, [pokemonName])
 
+  console.log('error:', error);
   if (error) {
     return (
       <div role="alert">
