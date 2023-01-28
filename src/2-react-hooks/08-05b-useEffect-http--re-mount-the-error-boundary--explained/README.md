@@ -54,4 +54,4 @@ function App() {
 ```
 
 
-![](/Users/apollotang/3/g-authors/g-kent/epic-react/wf/src/2-react-hooks/08-05b-useEffect-http--re-mount-the-error-boundary--explained/doc/rerender-errorboundary.jpg)
+![](./doc/rerender-errorboundary.jpg)
