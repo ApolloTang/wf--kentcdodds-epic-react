@@ -1,11 +1,9 @@
-### 6. 💯 use react-error-boundary
+### 7. 💯 reset the error boundary
 
-[Production deploy](https://react-hooks.netlify.app/isolated/final/06.extra-6.js)
+[Production deploy](https://react-hooks.netlify.app/isolated/final/06.extra-7.js)
 
-As cool as our own `ErrorBoundary` is, I'd rather not have to maintain it in the
-long-term. Luckily for us, there's an npm package we can use instead and it's
-already installed into this project. It's called
-[`react-error-boundary`](https://github.com/bvaughn/react-error-boundary).
-
-Go ahead and give that a look and swap out our own `ErrorBoundary` for the one
-from `react-error-boundary`.
+You may have noticed a problem with the way we're resetting the internal state
+of the `ErrorBoundary` using the `key`. Unfortunately, we're not only
+re-mounting the `ErrorBoundary`, we're also re-mounting the `PokemonInfo` which
+results in a flash of the initial "Submit a pokemon" state whenever we change
+our pokemon.
