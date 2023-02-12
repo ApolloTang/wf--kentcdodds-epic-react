@@ -10,6 +10,16 @@ function MyComponent() {
 
   const handleThrowError = () => {
     throw new Error('opps! (Not caught)')
+    // Error boundaries do not catch errors inside event handlers.
+    // React doesn’t need error boundaries to recover from errors
+    // in event handlers. Unlike the render method and lifecycle
+    // methods, the event handlers don’t happen during rendering.
+    // So if they throw, React still knows what to display on
+    // the screen.  If you need to catch an error inside an event
+    // handler, use the regular JavaScript try / catch statement
+    // Ref:
+    //  https://github.com/bvaughn/react-error-boundary/issues/101
+    //  https://reactjs.org/docs/error-boundaries.html#how-about-event-handlers
   }
 
 
