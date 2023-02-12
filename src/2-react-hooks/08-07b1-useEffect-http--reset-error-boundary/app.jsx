@@ -53,7 +53,7 @@ function PokemonInfo({pokemonName}) {
 }
 
 
-function ErrorFallback({error}) {
+function ErrorFallback({error, resetErrorBoundary}) {
   return (
     <div role="alert">
       There was an error:{' '}
