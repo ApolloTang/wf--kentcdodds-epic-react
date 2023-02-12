@@ -1,6 +1,6 @@
 ### # Rest error boundary boilerplate
 
-
+[bvaughn/react-error-boundary](https://github.com/bvaughn/react-error-boundary)
 
 ```jsx
 import React from 'react'
