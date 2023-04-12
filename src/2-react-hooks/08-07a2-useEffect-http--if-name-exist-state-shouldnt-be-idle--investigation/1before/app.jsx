@@ -56,7 +56,9 @@ function PokemonInfo({pokemonName}) {
 
   React.useEffect(() => {
     async function useEffectContent() {
-      await sleep(3000)
+
+      await sleep(3000)    // Pause so you can see the demo
+
       if (!pokemonName) {
         return
       }
