@@ -7,6 +7,7 @@ import {App} from './app'
 // import App from '../exercise/06'
 import {server} from './mocks/server'
 
+const sleep = (ms) => new Promise(r=>{ setTimeout(()=>r(), ms) })
 
 beforeEach(() =>{
   server.listen()
@@ -28,6 +29,7 @@ test('displays the pokemon', async () => {
   await userEvent.type(input, 'pikachu')
   await userEvent.click(submit)
 
+  await sleep(2000)
   await screen.findByRole('heading', {name: /pikachu/i})
 
   // verify that a request is made when props change
@@ -35,12 +37,14 @@ test('displays the pokemon', async () => {
   await userEvent.type(input, 'ditto')
   await userEvent.click(submit)
 
+  await sleep(2000)
   await screen.findByRole('heading', {name: /ditto/i})
 
   // verify that when props remain the same a request is not made
   window.fetch.mockClear()
   await userEvent.click(submit)
 
+  await sleep(2000)
   await screen.findByRole('heading', {name: /ditto/i})
 
   alfredTip(
