@@ -21,6 +21,7 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-        "react-hooks/exhaustive-deps": "error",
+        "react-hooks/exhaustive-deps": "error", // https://stackoverflow.com/a/59612124/3136861
+        "react/prop-types": "off"  // https://stackoverflow.com/a/68963473/3136861
     }
 }
