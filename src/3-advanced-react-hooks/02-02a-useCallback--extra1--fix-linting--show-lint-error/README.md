@@ -60,6 +60,41 @@ function useAsync(asyncCallback, initialState, dependencies) {
 
   return state
 }
+
+function PokemonInfo({pokemonName}) {
+  const state = useAsync(
+    // ... code not shown
+    [pokemonName] 
+  )
+
+ // ... code not shown
+}
+
 ```
 
 ![run eslint](./documentation/linting-error.png)
+
+```jsx
+function useAsync(asyncCallback, initialState, dependencies) {
+  /* code not shown */
+
+  React.useEffect(() => {    
+    /* code not shown */
+  }, dependencies) // <--- [line 57:6] `dependencies` is an array but eslint can't tell.
+  // ~~~~~~~~~~~~
+  //            LINT ERROR: React Hook React.useEffect was passed a 
+  //                        dependency list that is not an array literal.
+
+  return state
+}
+
+function PokemonInfo({pokemonName}) {
+  const state = useAsync(
+    /* code not shown */
+    [pokemonName] 
+  )
+
+ /* code not shown */
+}
+```
+
