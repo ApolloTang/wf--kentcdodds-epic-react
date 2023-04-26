@@ -42,6 +42,7 @@
     "esbuild-loader": "^2.20.0",
     "eslint": "^8.39.0",
     "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "find-free-port": "^2.0.0",
     "fork-ts-checker-webpack-plugin": "^7.2.13",
     "glob": "^8.0.3",
