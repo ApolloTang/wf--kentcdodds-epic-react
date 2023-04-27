@@ -32,27 +32,22 @@ function asyncReducer(state, action) {
 
 
 function useAsync(asyncCallback, initialState) {
-  const [state, dispatch] = React.useReducer(asyncReducer, {
-    status: 'idle',
-    data: null,
-    error: null,
-    ...initialState,
-  })
+  const [state, dispatch] = React.useReducer(
+    asyncReducer,
+    { status: 'idle', data: null, error: null, ...initialState, }
+  )
 
   React.useEffect(() => {
     const promise = asyncCallback()
-    if (!promise) {
-      return
-    }
+    if (!promise) { return }
+
     dispatch({type: 'pending'})
+
     promise.then(
-      data => {
-        dispatch({type: 'resolved', data})
-      },
-      error => {
-        dispatch({type: 'rejected', error})
-      },
+      data => { dispatch({type: 'resolved', data}) },
+      error => { dispatch({type: 'rejected', error}) },
     )
+
     // eslint plugin can statically analyze this
   }, [asyncCallback])
 
@@ -61,15 +56,12 @@ function useAsync(asyncCallback, initialState) {
 
 
 function PokemonInfo({pokemonName}) {
-  // Everytime `pokemonName` change we clear cached and return a new callback
   const asyncCallback = React.useCallback(
     () => {
-      if (!pokemonName) {
-        return
-      }
+      if (!pokemonName) { return }
       return fetchPokemon(pokemonName)
     },
-    [pokemonName]
+    [pokemonName] // If `pokemonName` change we clear cached and return a new callback
   )
 
   const state = useAsync(

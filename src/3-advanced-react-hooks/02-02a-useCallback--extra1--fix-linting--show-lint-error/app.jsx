@@ -40,17 +40,13 @@ function useAsync(asyncCallback, initialState, dependencies) {
 
   React.useEffect(() => {
     const promise = asyncCallback()
-    if (!promise) {
-      return
-    }
+    if (!promise) { return }
+
     dispatch({type: 'pending'})
+
     promise.then(
-      data => {
-        dispatch({type: 'resolved', data})
-      },
-      error => {
-        dispatch({type: 'rejected', error})
-      },
+      data => { dispatch({type: 'resolved', data}) },
+      error => { dispatch({type: 'rejected', error}) },
     )
     // too bad the eslint plugin can't statically analyze this :-(
     // xxxxxxx eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,9 +59,7 @@ function useAsync(asyncCallback, initialState, dependencies) {
 function PokemonInfo({pokemonName}) {
   const state = useAsync(
     () => {
-      if (!pokemonName) {
-        return
-      }
+      if (!pokemonName) { return }
       return fetchPokemon(pokemonName)
     },
     {status: pokemonName ? 'pending' : 'idle'},
