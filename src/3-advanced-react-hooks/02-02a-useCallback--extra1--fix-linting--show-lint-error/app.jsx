@@ -31,12 +31,10 @@ function asyncReducer(state, action) {
 
 
 function useAsync(asyncCallback, initialState, dependencies) {
-  const [state, dispatch] = React.useReducer(asyncReducer, {
-    status: 'idle',
-    data: null,
-    error: null,
-    ...initialState,
-  })
+  const [state, dispatch] = React.useReducer(
+    asyncReducer,
+    { status: 'idle', data: null, error: null, ...initialState }
+  )
 
   React.useEffect(() => {
     const promise = asyncCallback()

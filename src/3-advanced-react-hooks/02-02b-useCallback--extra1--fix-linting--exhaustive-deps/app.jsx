@@ -34,7 +34,7 @@ function asyncReducer(state, action) {
 function useAsync(asyncCallback, initialState) {
   const [state, dispatch] = React.useReducer(
     asyncReducer,
-    { status: 'idle', data: null, error: null, ...initialState, }
+    { status: 'idle', data: null, error: null, ...initialState }
   )
 
   React.useEffect(() => {
