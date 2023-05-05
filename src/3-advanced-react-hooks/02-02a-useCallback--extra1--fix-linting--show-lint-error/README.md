@@ -1,5 +1,17 @@
 # lint error: react-hooks/exhaustive-deps
 
+
+
+## 📝 Your Notes
+
+This is starting code for video: https://epicreact.dev/modules/advanced-react-hooks/usecallback-custom-hooks-extra-credit-solution-1. 
+
+It is same code as [3-advanced-react-hooks/02-01c-useCallback--finish](https://github.com/ApolloTang/wf--kentcdodds-epic-react/tree/main/src/3-advanced-react-hooks/02-01c-useCallback--finish) but formated for easy reading.
+
+In this execercise I also added eslint to the project laboratory so I can see the linting error as discussed by Kent in his video. 
+
+
+
 ## Add configuration:
 
 ```bash

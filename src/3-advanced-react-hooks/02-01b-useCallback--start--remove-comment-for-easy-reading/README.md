@@ -1,8 +1,12 @@
 # useCallback: custom hooks
 
+
+
 ## 📝 Your Notes
 
-Elaborate on your learnings here in `src/exercise/02.md`
+This is still the starting code for video: https://epicreact.dev/modules/advanced-react-hooks/usecallback-custom-hooks-solution but with Kent's comment removed so it is less noisy to read.
+
+
 
 ## Background
 

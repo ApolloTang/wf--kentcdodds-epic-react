@@ -2,7 +2,9 @@
 
 ## 📝 Your Notes
 
-Elaborate on your learnings here in `src/exercise/02.md`
+This is starting code for video: https://epicreact.dev/modules/advanced-react-hooks/usecallback-custom-hooks-solution
+
+
 
 ## Background
 
