@@ -1,4 +1,11 @@
-### 2. 💯 return a memoized `run` function from useAsync
+# Extra Credit 2
+
+## 📝 Your Notes
+
+This is finished code for video: https://epicreact.dev/modules/advanced-react-hooks/usecallback-custom-hooks-extra-credit-solution-2
+
+
+## 2. 💯 return a memoized `run` function from useAsync
 
 [Production deploy](https://advanced-react-hooks.netlify.com/isolated/final/02.extra-2.js)
 

@@ -1,6 +1,13 @@
-## Extra Credit
+# Extra Credit 1
 
-### 1. 💯 use useCallback to empower the user to customize memoization
+
+
+## 📝 Your Notes
+
+This is finished code for video: https://epicreact.dev/modules/advanced-react-hooks/usecallback-custom-hooks-extra-credit-solution-1. 
+
+
+## 1. 💯 use useCallback to empower the user to customize memoization
 
 [Production deploy](https://advanced-react-hooks.netlify.com/isolated/final/02.extra-1.js)
 
