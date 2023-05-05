@@ -37,7 +37,7 @@ function useAsync(initialState) {
     { status: 'idle', data: null, error: null, ...initialState }
   )
 
-  const run = React.useCallback(
+  const runAsync = React.useCallback(
     promise => {
       dispatch({type: 'pending'})
       promise.then(
@@ -47,7 +47,7 @@ function useAsync(initialState) {
     }, []
   )
 
-  return {...state, run}
+  return {...state, runAsync}
 }
 
 
@@ -58,15 +58,18 @@ function PokemonInfo({pokemonName}) {
 
   const {
     data: pokemon, status, error,
-    run
+    runAsync
   } = state
 
   React.useEffect(
     () => {
       if (!pokemonName) { return }
-      run(fetchPokemon(pokemonName))
+
+      // note the absence of `await` here
+      const fetchPromise = fetchPokemon(pokemonName)
+      runAsync(fetchPromise)
     },
-    [pokemonName, run]
+    [pokemonName, runAsync]
   )
 
   switch (status) {
