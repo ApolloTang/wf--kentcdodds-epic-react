@@ -13,6 +13,9 @@ import {
 } from './pokemon'
 
 
+const sleep = (ms) => new Promise( (rs) => { setTimeout(rs, ms) })
+
+
 function asyncReducer(state, action) {
   switch (action.type) {
     case 'pending': {
@@ -41,7 +44,12 @@ function useAsync(initialState) {
     promise => {
       dispatch({type: 'pending'})
       promise.then(
-        data => { dispatch({type: 'resolved', data}) },
+        async (data) => {
+          console.log('sleep, go unmount component within 3000ms')
+          await sleep(3000)     // go unmount component after sleep
+          console.log('awake')  // you will see this message after unmount
+          dispatch({type: 'resolved', data})
+        },
         error => { dispatch({type: 'rejected', error}) },
       )
     }, []
@@ -71,7 +79,7 @@ function PokemonInfo({pokemonName}) {
     },
     [pokemonName, runAsync]
   )
-
+   console.log(status)
   switch (status) {
     case 'idle':
       return <span>Submit a pokemon</span>
