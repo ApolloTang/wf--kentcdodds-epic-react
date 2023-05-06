@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering a component w Testing-library 1`] = `
+<div>
+  <div
+    id="my-component"
+  >
+    <span
+      style="color: red;"
+    >
+       Hello World 
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Rendering a component w Testing-library 2`] = `
+<div
+  id="my-component"
+>
+  <span
+    style="color: red;"
+  >
+     Hello World 
+  </span>
+</div>
+`;
