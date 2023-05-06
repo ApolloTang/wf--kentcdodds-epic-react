@@ -1,107 +1,47 @@
-# Extra Credit 2
+### 3. 💯 make safeDispatch with useCallback, useRef, and useEffect
 
-## 📝 Your Notes
+[Production deploy](https://advanced-react-hooks.netlify.com/isolated/final/02.extra-3.js)
 
-This is finished code for video: https://epicreact.dev/modules/advanced-react-hooks/usecallback-custom-hooks-extra-credit-solution-2
+**NOTICE: Things have changed slightly.** The app you're running the exercises
+in was changed since the videos were recorded and you can no longer see this
+issue by changing the exercise. All the exercises are now rendered in an iframe
+on the exercise pages, so when you go to a different exercise, you're
+effectively "closing" the page, so all JS execution for that exercise stops.
 
+So I've added a little checkbox which you can use to mount and unmount the
+component with ease. This has the benefit of also working on the isolated page
+as well. On the exercise page, you'll want to make sure that your console output
+is showing the output from the iframe by
+[selecting the right context](https://developers.google.com/web/tools/chrome-devtools/console/reference#context).
 
-## 2. 💯 return a memoized `run` function from useAsync
+I've also added a test for this one to help make sure you've got it right.
 
-[Production deploy](https://advanced-react-hooks.netlify.com/isolated/final/02.extra-2.js)
+Also notice that while what we're doing here is still useful and you'll learn
+valuable skills, the warning we're suppressing
+[goes away in React v18](https://github.com/reactwg/react-18/discussions/82).
 
-Requiring users to provide a memoized value is fine. You can document it as part
-of the API and expect people to just read the docs right? lol, that's hilarious
-😂 It'd be WAY better if we could redesign the API a bit so we (as the hook
-developers) are the ones who have to memoize the function, and the users of our
-hook don't have to worry about it.
+Phew, ok, back to your extra credit!
 
-So see if you can redesign this a little bit by providing a (memoized) `run`
-function that people can call in their own `useEffect` like this:
+This one's a bit tricky, and I'm going to be intentionally vague here to give
+you a bit of a challenge, but consider the scenario where we fetch a pokemon,
+and before the request finishes, we change our mind and navigate to a different
+page (or uncheck the mount checkbox). In that case, the component would get
+removed from the page ("unmounted") and when the request finally does complete,
+it will call `dispatch`, but because the component has been removed from the
+page, we'll get this warning from React:
 
-```javascript
-// 💰 destructuring this here now because it just felt weird to call this
-// "state" still when it's also returning a function called "run" 🙃
-const {data: pokemon, status, error, run} = useAsync({ status: pokemonName ? 'pending' : 'idle' })
-
-React.useEffect(() => {
-  if (!pokemonName) {
-    return
-  }
-  // 💰 note the absence of `await` here. We're literally passing the promise
-  // to `run` so `useAsync` can attach it's own `.then` handler on it to keep
-  // track of the state of the promise.
-  const pokemonPromise = fetchPokemon(pokemonName)
-  run(pokemonPromise)
-}, [pokemonName, run])
+```text
+Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
 ```
 
+The best solution to this problem would be to
+[cancel the request](https://developers.google.com/web/updates/2017/09/abortable-fetch),
+but even then, we'd have to handle the error and prevent the `dispatch` from
+being called for the rejected promise.
 
-
----
-
-## My Note:
-
-The interesting about component  `PokemonInfo` in this excercise is that despite it is using redux, there is no redux's dispatching code visible. 
-
-```jsx
-function PokemonInfo({pokemonName}) {
-  const state = useAsync(
-    {status: pokemonName ? 'pending' : 'idle'}
-  )
-
-  const {
-    data: pokemon, status, error,
-    runAsync
-  } = state
-
-  React.useEffect(
-    () => {
-      if (!pokemonName) { return }
-
-      // note the absence of `await` here
-      const fetchPromise = fetchPokemon(pokemonName)
-      runAsync(fetchPromise)
-    },
-    [pokemonName, runAsync]
-  )
-
-  switch (status) {
-    case 'idle':
-      return <span>Submit a pokemon</span>
-    case 'pending':
-      return <PokemonInfoFallback name={pokemonName} />
-    case 'rejected':
-      throw error
-    case 'resolved':
-      return <PokemonDataView pokemon={pokemon} />
-    default:
-      throw new Error('This should be impossible')
-  }
-}
-```
-
-All redux's dispatching code is hidden in the `useAsync` hook.  This `useAsync` return a method `runAsync` which you can pass in your own "fetch promise" (`fetchPromise`). Note that the "fetch promise" is unaware of any using of redux mechanism.  
-
-```jsx
-function useAsync(initialState) {
-  const [state, dispatch] = React.useReducer(
-    asyncReducer,
-    { status: 'idle', data: null, error: null, ...initialState }
-  )
-
-  const runAsync = React.useCallback(
-    promise => {
-      dispatch({type: 'pending'})
-      promise.then(
-        data => { dispatch({type: 'resolved', data}) },
-        error => { dispatch({type: 'rejected', error}) },
-      )
-    }, []
-  )
-
-  return {...state, runAsync}
-}
-```
+So see whether you can work out a solution for preventing `dispatch` from being
+called if the component is unmounted. Depending on how you implement this, you
+might need `useRef`, `useCallback`, and `useEffect`.
 
 
 
