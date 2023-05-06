@@ -1,14 +1,5 @@
-const isTest = String(process.env.NODE_ENV) === 'test'
+// const isTest = String(process.env.NODE_ENV) === 'test'
 
-const modulesType = ( isTest ) => {
-  switch (true) {
-    case (isTest): {
-      return 'commonjs'
-    }
-    default:
-      return false
-  }
-}
 const babelConfig = api => {
   api.cache(true)
 
@@ -20,7 +11,7 @@ const babelConfig = api => {
         // 'targets': '> 0.25%, not dead',  // <-- this will override .browserslistrc
         'useBuiltIns': 'usage',
         'corejs': 3,
-        'modules': modulesType(isTest)
+        'modules': 'commonjs'
       },
     ],
     '@babel/preset-typescript',
@@ -28,7 +19,7 @@ const babelConfig = api => {
   ];
 
   const plugins = [
-    isTest ? 'babel-plugin-dynamic-import-node' : null
+    'babel-plugin-dynamic-import-node'
   ].filter(Boolean);
 
   return {

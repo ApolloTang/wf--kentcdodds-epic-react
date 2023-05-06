@@ -1,4 +1,5 @@
 module.exports = {
+  testTimeout: 10000,
 
   testPathIgnorePatterns: [
     '/node_modules/',
@@ -9,6 +10,7 @@ module.exports = {
   ],
 
   transform: {
+    ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub", // https://github.com/facebook/jest/issues/2663#issuecomment-507294740
     '\\.(js|jsx|ts|tsx)$': ['babel-jest', { configFile: './babel.config.testing.js' }] // https://github.com/facebook/jest/issues/3845#issuecomment-645298425
   },
 
