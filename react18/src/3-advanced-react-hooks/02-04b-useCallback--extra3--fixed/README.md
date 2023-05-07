@@ -1,4 +1,6 @@
-### 3. 💯 make safeDispatch with useCallback, useRef, and useEffect
+# Extra 3
+
+## 3. 💯 make safeDispatch with useCallback, useRef, and useEffect
 
 [Production deploy](https://advanced-react-hooks.netlify.com/isolated/final/02.extra-3.js)
 
@@ -45,3 +47,11 @@ might need `useRef`, `useCallback`, and `useEffect`.
 
 
 
+---
+
+
+
+## My Note: 
+
+This is no longer relevent in React 18
+For React 17 see: [react17/src/3-advanced-react-hooks/02-04c-useCallback--extra3--cleanup](https://github.com/ApolloTang/wf--kentcdodds-epic-react/tree/main/react17/src/3-advanced-react-hooks/02-04c-useCallback--extra3--cleanup)
