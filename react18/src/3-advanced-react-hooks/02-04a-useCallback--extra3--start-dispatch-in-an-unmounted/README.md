@@ -1,4 +1,6 @@
-### 3. 💯 make safeDispatch with useCallback, useRef, and useEffect
+# Extra 3
+
+## 3. 💯 make safeDispatch with useCallback, useRef, and useEffect
 
 [Production deploy](https://advanced-react-hooks.netlify.com/isolated/final/02.extra-3.js)
 
