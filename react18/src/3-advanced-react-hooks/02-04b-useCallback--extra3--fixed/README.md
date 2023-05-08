@@ -53,5 +53,6 @@ might need `useRef`, `useCallback`, and `useEffect`.
 
 ## My Note: 
 
-This is no longer relevent in React 18
-For React 17 see: [react17/src/3-advanced-react-hooks/02-04v-useCallback--extra3--fixed](https://github.com/ApolloTang/wf--kentcdodds-epic-react/tree/main/react17/src/3-advanced-react-hooks/02-04b-useCallback--extra3--fixed)
+This is no longer relevent in React 18, see: https://github.com/kentcdodds/advanced-react-hooks/issues/148
+
+For React 17 see: [react17/src/3-advanced-react-hooks/02-04b-useCallback--extra3--fixed](https://github.com/ApolloTang/wf--kentcdodds-epic-react/tree/main/react17/src/3-advanced-react-hooks/02-04b-useCallback--extra3--fixed)
