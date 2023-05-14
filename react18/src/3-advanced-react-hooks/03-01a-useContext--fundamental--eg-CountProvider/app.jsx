@@ -27,7 +27,7 @@ function CountDisplay() {
 }
 
 
-function Counter() {
+function CounterControl() {
   const [, setCount] = React.useContext(CountContext)
   const increment = () => setCount(c => c + 1)
 
@@ -39,8 +39,8 @@ function App() {
   return (
     <div>
       <CountProvider>
+        <CounterControl />
         <CountDisplay />
-        <Counter />
       </CountProvider>
     </div>
   )
