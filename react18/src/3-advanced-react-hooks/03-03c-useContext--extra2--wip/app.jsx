@@ -15,12 +15,21 @@ import {
   PokemonErrorBoundary,
 } from './pokemon'
 
+
+
+/*
+  Put useReduce into React context. The purpose of this reducer is
+  to cache previously fetched pokemon.
+*/
 const PokemonCacheContext = React.createContext()
 
 function pokemonCacheReducer(state, action) {
   switch (action.type) {
     case 'ADD_POKEMON': {
-      return {...state, [action.pokemonName]: action.pokemonData}
+      return {
+        ...state,
+        [action.pokemonName]: action.pokemonData // <--- this is the cached pokemon dictionary
+      }
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -43,6 +52,22 @@ function usePokemonCache() {
   return context
 }
 
+
+
+
+
+/*
+  There are two reducers in this app. One is reside in `useAsync`, and
+  the other is in the ReactContext (accessibale via `usePokemonCache`).
+
+  The main task of the reducer in `useAsync` is to handle the fetch state. The
+  `run` API of useAsync let you execute custom http promise (`fetchPokemon()`
+  in this case).
+
+  When the custom http promise resolved, it will engage the second reducer to
+  save the fetched pokemon inside the pokemon cache. The pokemon cache is a
+  dictionary object inside the reducer.
+  */
 function PokemonInfo({pokemonName: externalPokemonName}) {
   const [cache, dispatch] = usePokemonCache()
 
@@ -55,7 +80,7 @@ function PokemonInfo({pokemonName: externalPokemonName}) {
     if (!pokemonName) {
       return
     } else if (cache[pokemonName]) {
-      setData(cache[pokemonName])
+      setData(cache[pokemonName])   //  <----- see explaination in util.js
     } else {
       run(
         fetchPokemon(pokemonName).then(pokemonData => {
@@ -79,6 +104,14 @@ function PokemonInfo({pokemonName: externalPokemonName}) {
   throw new Error('This should be impossible')
 }
 
+
+
+
+/*
+  The component `PreviousPokemon` is a presentation component
+  showing a catalogue for the cached pokemon saved in the reducer (made avalaiable
+  throughout the app via of React context).
+ */
 function PreviousPokemon({onSelect}) {
   const [cache] = usePokemonCache()
   return (
@@ -100,6 +133,13 @@ function PreviousPokemon({onSelect}) {
   )
 }
 
+
+
+/*
+ The component `PokemonSection` consist of detailed view
+ and pokemon http fetch mechanism. It also has a form to
+ let user enter the name of pokemon wishes to view.
+*/
 function PokemonSection({onSelect, pokemonName}) {
   return (
     <PokemonCacheProvider>
@@ -117,6 +157,8 @@ function PokemonSection({onSelect, pokemonName}) {
     </PokemonCacheProvider>
   )
 }
+
+
 
 function App() {
   const [pokemonName, setPokemonName] = React.useState(null)
