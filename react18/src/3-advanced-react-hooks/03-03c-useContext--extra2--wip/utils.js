@@ -61,7 +61,7 @@ function useAsync(initialState) {
   )
 
   // Normally 'resolved' is dispatched automatically when
-  // an http is succeeded, but we expose an API (setData)
+  // an http is successful, but we expose an API (setData)
   // so we can dispatch 'resolved' externally (in this case,
   // instead of waiting for http to resolve, we maually dispatch with
   // data from cache).
