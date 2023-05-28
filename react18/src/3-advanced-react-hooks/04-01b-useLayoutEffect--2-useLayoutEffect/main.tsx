@@ -1,6 +1,7 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
 import App from "./app.jsx";
+import './styles.css'
 
 const reactContainer = document.createElement('div')
 reactContainer.innerText =  'react component goes here'
